@@ -10,7 +10,8 @@ const { usuariosGet,
         usuariosPut,
         usuariosPost,
         usuariosDelete,
-        usuariosPatch } = require('../controllers/usuarios');
+        usuariosPatch,
+        rolesPost } = require('../controllers/usuarios');
 
 const router = Router();
 
@@ -33,6 +34,11 @@ router.post('/',[
     check('rol').custom( esRoleValido ), 
     validarCampos
 ], usuariosPost );
+
+router.post('/rol',[
+    check('rol', 'El nombre es obligatorio').not().isEmpty(),
+    validarCampos
+], rolesPost );
 
 router.delete('/:id',[
     check('id', 'No es un ID válido').isMongoId(),
