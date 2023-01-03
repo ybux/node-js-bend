@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 
 
 const Usuario = require('../models/usuario');
+const Rol = require('../models/role');
 
 
 
@@ -76,6 +77,18 @@ const usuariosDelete = async(req, res = response) => {
     res.json(usuario);
 }
 
+const rolesPost = async(req, res = response) => {
+    
+    const { rol } = req.body;
+    const rol1 = new Rol ({ rol });
+
+    // Guardar en BD
+    await rol1.save();
+
+    res.json({
+        rol1
+    });
+}
 
 
 
@@ -85,4 +98,5 @@ module.exports = {
     usuariosPut,
     usuariosPatch,
     usuariosDelete,
+    rolesPost
 }
